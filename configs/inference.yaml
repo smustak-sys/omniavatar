@@ -27,11 +27,11 @@ max_tokens: 30000
 seq_len: 200
 overlap_frame: 13 # must be 1 + 4*n
 guidance_scale: 4.5
-audio_scale: 
-num_steps: 50
+audio_scale: 5.0     # stronger audio guidance -> better lip sync (recommended 4-6)
+num_steps: 20        # 20 is usually plenty when combined with TeaCache
 fps: 25
 sample_rate: 16000
 negative_prompt: "Vivid color tones, background/camera moving quickly, screen switching, subtitles and special effects, mutation, overexposed, static, blurred details, subtitles, style, work, painting, image, still, overall grayish, worst quality, low quality, JPEG compression residue, ugly, incomplete, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, malformed limbs, fingers merging, motionless image, chaotic background, three legs, crowded background with many people, walking backward"
 silence_duration_s: 0.3
 use_fsdp: False
-tea_cache_l1_thresh: 0 # 0.14 The larger this value is, the faster the speed, but the worse the visual quality. TODO check value
+tea_cache_l1_thresh: 0.10  # >0 enables TeaCache, ~1.5x speedup. Recommended 0.05-0.15.
