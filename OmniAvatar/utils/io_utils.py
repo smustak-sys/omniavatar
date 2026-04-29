@@ -161,7 +161,7 @@ def save_video_as_grid_and_mp4(video_batch: torch.Tensor, save_path: str, fps: f
                     audio_path = os.path.join(tmp_path, f"{i:06d}.mp3")
                     save_wav(audio[i], audio_path)
                 # cmd = f'/usr/bin/ffmpeg -i {tmp_save_path} -i {audio_path} -v quiet -c:v copy -c:a libmp3lame -strict experimental {tmp_save_path[:-4]}_wav.mp4 -y'
-                cmd = f'/usr/bin/ffmpeg -i {tmp_save_path} -i {audio_path} -v quiet -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac {tmp_save_path[:-4]}_wav.mp4 -y'
+                cmd = f'ffmpeg -i {tmp_save_path} -i {audio_path} -v quiet -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac {tmp_save_path[:-4]}_wav.mp4 -y'
                 subprocess.check_call(cmd, stdout=None, stdin=subprocess.PIPE, shell=True)
                 subprocess.run([f"cp {tmp_save_path[:-4]}_wav.mp4 {now_save_path[:-4]}_wav.mp4"], check=True, shell=True)
                 os.remove(now_save_path)
